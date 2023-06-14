@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"   ?>
+<!DOCTYPE c3p0-config>
+<c3p0-config>
+    <!-- This is default config! -->
+    <default-config>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">10</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </default-config>
+
+    <!-- This is my config for mysql-->
+    <named-config name="mysql">
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/disk?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="user">root</property>
+        <property name="password">3W9hyq9wl9com</property>
+        <property name="initialPoolSize">2</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">10</property>
+        <property name="minPoolSize">2</property>
+        <property name="maxStatements">200</property>
+    </named-config>
+
+</c3p0-config>
