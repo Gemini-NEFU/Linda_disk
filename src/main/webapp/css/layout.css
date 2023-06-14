@@ -1,0 +1,146 @@
+body,html{overflow: hidden;height:100%;font-weight:400;}
+a{color: #030408}
+.frame-all{width: 100%;min-width: 1100px}
+.frame-all .layoutHeader{overflow: hidden;padding: 5px 20px 2px 20px;
+    border-bottom:1px solid #F5F5F5;box-shadow:0px 2px 1px #F9F9F9}
+.frame-all .layoutHeader .listLeft{float: left}
+.frame-all .layoutHeader .listRight{float: right;height: 60px;line-height: 60px}
+.frame-all .layoutHeader .listLeft a{font-size: 16px;margin-left: 40px;padding: 10px 0px;}
+.frame-all .layoutHeader .listLeft .active{color: #36B9FF;
+    font-weight: 900;border-bottom:3px solid  #36B9FF }
+.frame-all .layoutHeader .listRight .photo{
+    width: 35px;height: 35px;border-radius: 50%;
+}
+.frame-all .layoutHeader .listRight img{
+margin: 0px 12px;}
+.skin-main{display: table;width: 100%;height:100%;}
+.frame-aside{display: table-cell;width: 200px;background-color: #F7F7F7;height:100%;
+}
+
+/*调left.jsp上的导航上的图片用的*/
+.frame-aside img{
+		margin-right: 12px;
+		width:27px;
+	
+		}
+		
+		
+.skin-main .frame-aside ul li{text-align: center;}
+.skin-main .frame-aside ul li a{display: block;padding: 12px 0px;}
+.skin-main .frame-aside ul li .active{background-color: #EAEAEA; height:55px; color:#09AAFF; font-weight:bold}
+.skin-main .frame-aside ul li .active img{height:35px}
+.skin-main .frame-aside ul li a:hover{background-color: #EAEAEA;text-decoration: none}
+.skin-main .frame-aside .aside-absolute{padding: 20px}
+.skin-main .frame-aside .aside-absolute .remaining{
+    height: 10px;background-color: #DEDEDE;border-radius: 5px;
+}
+.skin-main .frame-aside .aside-absolute .remaining .remainingSpace{width: 30%;
+    background-color: #28B2FC;height: 100%;border-radius: 5px;}
+.skin-main .frame-aside .aside-absolute .font{padding: 10px 0px}
+
+.skin-main .frame-aside .aside-absolute .layout-absolute img{margin-right: 11px}
+
+
+
+.frame-center{padding: 8px 10px} 
+
+.frame-center .frame-nav{overflow: hidden}
+.frame-center .frame-nav .centerLeft{float: left}
+.frame-center .frame-nav .centerRight{float: right}
+
+.frame-center .frame-nav .centerLeft a{
+    background-color: transparent; border: 1px solid #28B2FC;
+    color: #28B2FC;font-weight: 900; font-size:13px; padding: 6px 15px;
+    border-radius: 5px;margin-right:8px ;
+    height:16px;
+    display:inline-block;
+}
+.frame-center .frame-nav .centerLeft a:hover{
+ /*    border: 1px solid blue ;  */
+      box-shadow:0px 0px  8px 4px #C3EAFF;
+     cursor: pointer;
+}
+
+.frame-center .frame-nav .centerLeft a img{
+	 width:20px;
+	 vertical-align :middle;
+	 margin-right:7px;
+}
+
+
+.frame-center .frame-nav .centerLeft .active{background-color:#28B2FC;color: #ffffff; margin-left:5px }
+
+.frame-center .frame-nav .centerRight input{padding: 7px 25px;background-color: #F1F2F4;border:0px;border-radius: 20px}
+.frame-center .frame-nav .centerRight p{position: relative;float: left;margin:0px;margin-right:13px}
+.frame-center .frame-nav .centerRight p img{position: absolute;right:10px;top: 7px; cursor:pointer}
+.frame-center .frame-nav .centerRight>img{margin-left: 15px}
+
+/*这是全部文件那个框*/
+.frame-title{
+	height:2px; margin-top:10px;
+}
+.frame-center .frame-title span:nth-child(1){float: left}
+.frame-center .frame-title span:nth-child(2){float: right;font-size:14px;font-family: 微软雅黑}
+
+
+.frame-center .tab table{width: 100%;border-collapse:collapse;}
+.frame-center .tab table img{width: 25px}
+/* .frame-center .tab table tr td{border-bottom: 1px solid #F2F6FD; } */
+.frame-center .tab table tr td{border-bottom: 1px solid #EAEAEA; }
+.frame-center .tab table tr td input{margin-right: 10px; }
+.frame-center .tab table tr td{height:35px;padding:5px 0px; font-size:13px;font-family:微软雅黑}
+.frame-center .tab table tr td img{margin:0px 10px}
+
+.frame-center .tab table tr td:nth-child(1){width:47%}
+.frame-center .tab table tr td:nth-child(2){width:15%}
+.frame-center .tab table tr td:nth-child(3){width:15%}
+.frame-center .tab table tr td:nth-child(4){width:23%}
+                    
+.frame-center .tab .datas{overflow: auto;}
+
+/*以下样式全部用于 center.jsp 页面中*/
+.highlightTd{
+ 		background:#F4FBFF;
+ 	   	font-weight:bold;
+ 	}
+ 	
+ 	#center_table div{
+ 		padding:0px;
+ 		display:none;
+ 		
+ 	}
+ 	#center_table div img{
+ 		width:24px;
+ 		margin:0px;
+ 	}
+ 	
+ 	#center_table div a img{
+ 		margin-right:20px;
+ 	}
+ 	
+    .frame-title a{text-decoration: none; color:#09AAFF; font-size: 14px; font-family: 微软雅黑;}
+    .frame-title a:hover{font-weight: bold;}
+
+   .newrow-btn{
+   		border:1px solid #C3EAFF;
+   		background:white;
+   		color:#09AAFF;
+   		font-weight:bold;
+   		width:25px;
+   		height:25px;
+   		margin: 0px;
+   }
+   
+   #txtFolderName{
+	   border:1px solid #C3EAFF;
+	   height:21px;
+	   padding-left: 8px;
+	   width:200px;
+   }
+   
+    #txtFolderName:focus{
+	  box-shadow:0px 0px  8px 4px #C3EAFF;
+   }
+    	
+    	
+    	

@@ -29,7 +29,7 @@ replay_pid*
 .idea/
 .settings/   
 #忽略.settings目录
-./target/ 
+target
 #忽略target目录
 .classpath 
 #忽略.classpath这个文件
