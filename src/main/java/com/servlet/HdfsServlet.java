@@ -11,6 +11,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/HdfsServlet")
 public class HdfsServlet extends HttpServlet {
@@ -50,6 +52,26 @@ public class HdfsServlet extends HttpServlet {
         request.setAttribute("hdfsFileList", hdfsFileList);
         request.getRequestDispatcher("/center.jsp").forward(request, response);
 
+        //以下处理的是前台上面的 导航 类似:  javatools  > aaa  > bbb  > ccc 的呈现
+        List<String> urlList=new ArrayList<String>();
+        urlList.add(parent);
+
+        //处理完后,是  admin, admin/java, admin/java/lesson7 这样
+        while(parent.lastIndexOf("/")!=-1){
+            parent=	parent.substring(0,parent.lastIndexOf("/"));
+            urlList.add(0,parent );
+        }
+
+        urlList.remove(0);  //用户家目录没有必要在前台显示,所以排除
+
+        for (int i=0;i<urlList.size();i++) {
+            String str=urlList.get(i);
+            urlList.set(i,str+"_"+str.substring(str.lastIndexOf("/")+1)); //处理完后是 admin/java_java, admin/java/lesson7_lesson7 这样
+        }
+
+
+        request.setAttribute("urlList", urlList);
+        request.getRequestDispatcher("center.jsp").forward(request, response);
     }
 
 }

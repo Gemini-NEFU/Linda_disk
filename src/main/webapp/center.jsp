@@ -56,9 +56,11 @@
 
     <div class="frame-title">
         	   <span>
-	        	    <a> 全部文件  | </a>
-	                <a>  &gt;    </a>
-              	</span>
+          <a href="HdfsServlet?flag=manage"> 全部文件  | </a>
+        	<c:forEach  var="url" items="${urlList }">
+                <a onclick='getSubFiles("${fn:split(url,"_")[0] }")'>  &gt;  ${fn:split(url,"_")[1]}  </a>
+            </c:forEach>
+      	</span>
         <span>
             		  已全部加载，共  <label>${fn:length(hdfsFileList)} </label>个
                 </span>

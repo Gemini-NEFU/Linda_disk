@@ -83,7 +83,7 @@ public class DiskFileInfo {
         iconMap.put(".jpg", "picIcon.png");
         iconMap.put(".jpeg", "picIcon.png");
         iconMap.put(".png", "picIcon.png");
-        iconMap.put(".pdf", "pdfIcons.png");
+        iconMap.put(".pdf", "pdfIcon.png");
         iconMap.put(".xls", "xlsIcon.png");
         iconMap.put(".xlsx", "xlsIcon.png");
         iconMap.put(".doc", "wordIcon.png");
