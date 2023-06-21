@@ -1,6 +1,9 @@
 package com.dao.impl;
 import java.net.URI;
+
+import com.beans.DiskFileInfo;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import com.dao.HdfsDao;
@@ -33,6 +36,21 @@ public class HdfsDaoImpl implements HdfsDao{
             return result;
         }
         catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+    public DiskFileInfo[] getRootFileList(String userName) {
+        try {
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf);
+            FileStatus[] fileList = fs.listStatus(new Path("/hyq_disk/"+userName));
+            DiskFileInfo[] diskFileList=new DiskFileInfo[fileList.length];
+            for (int i = 0; i < fileList.length; i++) {
+                FileStatus f=fileList[i];
+                diskFileList [i]=new DiskFileInfo(f);
+            }
+            return diskFileList;
+        }
+        catch(Exception ex) {
             throw new RuntimeException(ex);
         }
     }

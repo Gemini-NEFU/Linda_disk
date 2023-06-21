@@ -50,8 +50,8 @@
         <form action="UserServlet?flag=login" method="post">
             <div class="login">
                 <h3>帐号密码登录</h3>
-                <p><input type="text" name="userName"  placeholder="手机/邮箱/用户名"  ></p>
-                <p><input type="password" name="password"  placeholder="密码"  ></p>
+                <p><input type="text" name="userName"  placeholder="手机/邮箱/用户名"  value="admin"></p>
+                <p><input type="password" name="password"  placeholder="密码"  value="admin"></p>
                 <p><input type="checkbox"  checked>下次自动登录   <br><span   class="errmsg"  >${msg }</span>
                 <p><button>登录</button></p>
                 <p><a href="#">忘记密码</a><a href="register.jsp">立即注册</a></p>
