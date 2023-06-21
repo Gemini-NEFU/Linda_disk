@@ -3,6 +3,8 @@ package com.servlet;
 import com.beans.*;
 import com.dao.*;
 import com.dao.impl.HdfsDaoImpl;
+import com.google.common.base.Strings;
+import com.util.StrUtil;
 import org.apache.hadoop.fs.FileStatus;
 
 import javax.servlet.*;
@@ -19,6 +21,8 @@ public class HdfsServlet extends HttpServlet {
 
         if("manager".equals(flag)){
             manager(request,response);
+        } else if ("managerSubFiles".equals(flag)) {
+            managerSubFiles(request, response);
         } else if ("upload".equals(flag)) {
 
         } else if ("download".equals(flag)) {
@@ -34,4 +38,18 @@ public class HdfsServlet extends HttpServlet {
         request.setAttribute("hdfsFileList", hdfsFileList);
         request.getRequestDispatcher("/center.jsp").forward(request, response);
     }
+    //点了文件夹以后,查出它的子文件列表
+    private void managerSubFiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String parent=request.getParameter("parent");  // 格式: /admin/java/lesson3
+        if(StrUtil.isNullOrEmpty(parent)) {
+            UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+            parent=user.getUserName();
+        }
+
+        DiskFileInfo[] hdfsFileList= hdfsDao.getSubFileList(parent);
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/center.jsp").forward(request, response);
+
+    }
+
 }

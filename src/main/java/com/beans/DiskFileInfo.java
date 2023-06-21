@@ -129,4 +129,11 @@ public class DiskFileInfo {
         this.name = name;
     }
 
+    public FileStatus getF() {
+        return f;
+    }
+
+    public void setF(FileStatus f) {
+        this.f = f;
+    }
 }

@@ -27,6 +27,11 @@
                 $(this).siblings().find("div").hide();
             });
         }
+
+        //
+        function getSubFiles(parent) {
+            window.location.href="HdfsServlet?flag=managerSubFiles&parent="+encodeURI(parent);
+        }
     </script>
 </head>
 
@@ -75,7 +80,9 @@
                     <tr class="highlightTd">
                         <td>
                             &nbsp; <input type="checkbox"><img src="images/fileIcons/${f.icon}">
-                            <label  > ${f.name}</label>
+                            <label   <c:if test="${f.f.directory==true }"> onclick="getSubFiles('${f.path }')" style='cursor:pointer' </c:if> >
+                                    ${f.name }
+                            </label>
                         </td>
                         <td >
                             <div>

@@ -7,5 +7,6 @@ import org.apache.hadoop.fs.FileStatus;
 public interface HdfsDao {
     boolean createUserRoot(String foldername);
     DiskFileInfo[] getRootFileList(String userName);
+    DiskFileInfo[] getSubFileList(String parent);
 
 }
