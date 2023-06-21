@@ -10,7 +10,7 @@ import com.dao.HdfsDao;
 public class HdfsDaoImpl implements HdfsDao{
     static final String USER_NAME="hadoop";
 //    static final String HDFS_PATH = "hdfs://mycluster/";
-    static final String HDFS_PATH = "hdfs://hadoopxty:8020";
+    static final String HDFS_PATH = "hdfs://hadoophyq:8020";
     static final Configuration conf;
 
 //    static {
@@ -24,6 +24,7 @@ public class HdfsDaoImpl implements HdfsDao{
 //    }
     static {
         conf=new Configuration();
+        conf.set("fs.hdfs.impl.disable.cache","true");
     }
     /**
      * 用于在hdfs创建目录
@@ -31,7 +32,7 @@ public class HdfsDaoImpl implements HdfsDao{
     public boolean createUserRoot(String folderName) {
         try{
             FileSystem fs = FileSystem.get(URI.create(HDFS_PATH),conf,USER_NAME);
-            boolean result=fs.mkdirs(new Path("/hyq_disk/"+folderName));
+            boolean result=fs.mkdirs(new Path("/"+folderName));
             fs.close();
             return result;
         }
@@ -42,7 +43,7 @@ public class HdfsDaoImpl implements HdfsDao{
     public DiskFileInfo[] getRootFileList(String userName) {
         try {
             FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf);
-            FileStatus[] fileList = fs.listStatus(new Path("/hyq_disk/"+userName));
+            FileStatus[] fileList = fs.listStatus(new Path("/"+userName));
             DiskFileInfo[] diskFileList=new DiskFileInfo[fileList.length];
             for (int i = 0; i < fileList.length; i++) {
                 FileStatus f=fileList[i];
