@@ -76,8 +76,11 @@ public class UserServlet extends HttpServlet {
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }
-    private void logout(HttpServletRequest request, HttpServletResponse response){
-
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //清除session信息
+        request.getSession().invalidate();
+        String script="<script>window.top.location.href='login.jsp'</script>";
+        response.getWriter().write(script);
     }
 }
 
