@@ -27,8 +27,19 @@ public class UserServlet extends HttpServlet {
             logout(request,response);
         }
     }
-    private void login(HttpServletRequest request, HttpServletResponse response){
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userName=request.getParameter("userName");
+        String password=request.getParameter("password");
 
+        UserInfo user =userDao.login(userName,password);
+        if(user!=null) {
+            request.getSession().setAttribute("session_user", user);
+            request.getRequestDispatcher("/index.html").forward(request, response);
+        }
+        else {
+            request.setAttribute("msg", "账号或密码错误");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }
     private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName=request.getParameter("userName");

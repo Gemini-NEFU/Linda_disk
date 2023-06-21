@@ -20,4 +20,9 @@ public class UserDaoImpl implements UserDao {
     public int delUser(String userName) {
         return DBUtil.update("delete from userInfo where userName=?", userName);
     }
+
+    public UserInfo login(String userName, String password) {
+        String sql="select * from userInfo where userName=? and password=?" ;
+        return DBUtil.getSingleObj(sql, UserInfo.class, userName,password);
+    }
 }

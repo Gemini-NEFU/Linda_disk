@@ -37,7 +37,7 @@
                 <p><button>注册</button></p>
                 <c:if test="${registerFlag==true }">
                     <div class="okmsg">
-                            ${msg }  现在就  <a href="login.html">登录</a>
+                            ${msg }  现在就  <a href="login.jsp">登录</a>
                     </div>
                 </c:if>
 

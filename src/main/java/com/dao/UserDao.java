@@ -8,4 +8,6 @@ public interface UserDao {
     UserInfo getUserByName(String userName);
 
     int delUser(String username);
+
+    UserInfo login(String username,String password);
 }
