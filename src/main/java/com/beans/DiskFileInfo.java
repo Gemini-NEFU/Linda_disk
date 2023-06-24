@@ -22,7 +22,7 @@ public class DiskFileInfo {
     private String name; //文件路径  去掉 hdfs://master:9000/ 这样的前缀,只留后面的文件名
 
     public String getModificationTime() {
-        SimpleDateFormat df=new SimpleDateFormat("yyyy/MM/dd hh:mm");
+        SimpleDateFormat df=new SimpleDateFormat("yyyy/MM/dd HH:mm");
         this.modificationTime=df.format(new Date(f.getModificationTime()));
         return this.modificationTime;
     }
