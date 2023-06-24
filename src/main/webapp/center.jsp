@@ -39,6 +39,39 @@
             $("#img1").show();
             document.form1.submit();
         }
+        function delFile(fileName){
+            if(confirm('确定要删除吗')==true){
+                window.location.href=" HdfsServlet?flag=delete&fileName=" +encodeURI(fileName);
+            }
+        }
+        function createNewTr(){
+            $("#center_table tr").unbind("mouseover");
+            $("#center_table tr").removeClass("highlightTd");
+
+            //   这里要禁用其他的按钮 ,待调试
+            //	 $("body tr *").attr("readonly","readonly" );
+            //	 $(".frame-nav *").attr("readonly","readonly" );
+
+            var innerTD =
+                "<tr>"+
+                "<td><img src='images/fileIcons/folder.png' /> <input id='txtFolderName'  value='请输入文件夹名称'> <button class='newrow-btn' onclick='mkDir()'>?</button>  <button  class='newrow-btn'  onclick='cancleCreateDir(this)'>X</button> </td><td></td><td></td><td></td>"
+                +"</tr>";
+
+            $("#center_table").prepend(innerTD);
+
+            document.getElementById("txtFolderName").select(); //让文本框内的文本默认被选中
+        }
+        function mkDir(){
+            var parent=encodeURI($("#parent").val());
+            var folderName=encodeURI($("#txtFolderName").val());
+            var url="HdfsServlet?flag=createFolder&parent="+parent+"&folderName="+folderName;
+            window.location.href=url;
+        }
+        function cancleCreateDir(btn){
+            $(btn).parent().parent().remove();
+            initTrEvent();
+        }
+
         ${refreshScript}
     </script>
 </head>
@@ -54,7 +87,7 @@
     <div class="frame-nav">
         <div class="centerLeft">
             <a  onclick="document.getElementById('btnFileUp').click();" class="active"><img src="images/upload.png"  />上传</a>
-            <a><img src="images/createfolder.png"/>新建文件夹</a>
+            <a onclick="createNewTr()"><img src="images/createfolder.png"/>新建文件夹</a>
             <a><img src="images/download.png" />离线下载</a>
             <a><img src="images/machine.png" />我的设备</a>
         </div>
@@ -103,8 +136,10 @@
                         <td >
                             <div>
                                 <a><img src="images/a.png" title="分享"  /></a>
+                                    <c:if test="${f.f.directory==false}">
                                 <a href="javascript:download('${f.path }')"><img src="images/b.png"  title="下载"  /></a>
-                                <a><img src="images/c.png"  title="删除"  /></a>
+                                    </c:if>
+                                <a onclick="return delFile('${f.path}')" ><img src="images/c.png"  title="删除"  /></a>
                             </div>
                         </td>
                         <td>${f.len}</td>

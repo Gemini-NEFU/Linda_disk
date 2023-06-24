@@ -126,6 +126,34 @@ public class HdfsDaoImpl implements HdfsDao{
             throw new RuntimeException(ex);
         }
     }
+    /**
+     * 删除HDFS上的文件或文件夹
+     * @param filePath 文件或文件夹的全路径
+     * @return
+     */
+    public boolean deleteFile(String filePath) {
+        try {
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf, USER_NAME);
+            String newPath = "/" + filePath.replace(HDFS_PATH, "");
+            boolean result = fs.delete(new Path(newPath), true);  //若不用true ,文件夹非空,删不掉,true表示递归
+            fs.close();
+            return result;
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    public boolean createFolder(String parent, String folderName) {
+        try{
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH),conf,USER_NAME);
+            boolean result= fs.mkdirs(new Path("/"+parent+"/"+folderName));
+            fs.close();
+            return result;
+        }
+        catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+
+    }
     public static void main(String[] args) {
         HdfsDaoImpl dao=new HdfsDaoImpl();
         boolean result=dao.createUserRoot("yyyy");

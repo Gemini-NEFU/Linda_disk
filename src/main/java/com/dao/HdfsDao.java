@@ -13,4 +13,8 @@ public interface HdfsDao {
     void downLoadFileAsStream(String fileName, ServletOutputStream outputStream);
     void uploadFile(String parent, String localPath);
     long getUserDiskSize(String userRoot);
+
+    boolean deleteFile(String fileName);
+
+    boolean createFolder(String parent, String folderName);
 }

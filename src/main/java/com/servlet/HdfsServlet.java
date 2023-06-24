@@ -33,7 +33,9 @@ public class HdfsServlet extends HttpServlet {
         } else if ("download".equals(flag)) {
             download(request, response);
         } else if ("delete".equals(flag)) {
-
+            delete(request,response);
+        } else if ("createFolder".equals(flag)) {
+            createFolder(request,response);
         }
     }
 
@@ -162,5 +164,41 @@ public class HdfsServlet extends HttpServlet {
             e.printStackTrace();
 
         }
+    }
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fileName=request.getParameter("fileName");
+        String parent=fileName.substring(0,fileName.lastIndexOf("/")+1);
+
+        if(hdfsDao.deleteFile(fileName)==true){
+            request.setAttribute("msg", "删除成功");
+            request.setAttribute("parent", parent);
+
+            //这句的作用是用来刷新磁盘使用百分比显示的
+            request.setAttribute("refreshScript", "window.parent.leftFrame.location.reload()");
+
+            this.manageSubFiles(request,response);
+        }
+    }
+    private void createFolder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String parent=request.getParameter("parent");
+        String folderName=request.getParameter("folderName");
+
+        //如果用户是自已的根目录创建的
+        if(StrUtil.IsNullOrEmpty(parent)) {
+            UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+            parent=user.getUserName();
+        }
+
+        boolean result=hdfsDao.createFolder(parent,folderName);
+        if(result==true) {
+            request.setAttribute("msg", "文件夹 "+folderName+" 创建成功");
+        }
+        else {
+            request.setAttribute("msg", "存在同名目录,创建失败 ");
+        }
+
+        request.setAttribute("parent", parent);
+        manageSubFiles(request, response);
+
     }
 }
