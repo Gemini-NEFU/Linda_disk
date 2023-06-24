@@ -30,19 +30,29 @@
 
         //
         function getSubFiles(parent) {
-            window.location.href="HdfsServlet?flag=managerSubFiles&parent="+encodeURI(parent);
+            window.location.href="HdfsServlet?flag=manageSubFiles&parent="+encodeURI(parent);
         }
         function download(uri){
             window.location.href="HdfsServlet?flag=download&fileName="+encodeURI(uri);
+        }
+        function uploadFile(){
+            $("#img1").show();
+            document.form1.submit();
         }
     </script>
 </head>
 
 <body>
+<img id="img1" style="display:none" src="images/processing.gif" />
+    <form style="display:none" name="form1" action="HdfsServlet?flag=upload" method="post"  enctype="multipart/form-data"  >
+        <input type="text" id="parent"  name="parent"  value='${param.parent }'  />  <!-- 这句的位置一定要在下句之上, parent代表的是当前在哪个文件夹下 -->
+        <input type="file" name="file1" id="btnFileUp" onchange="uploadFile()" style="display: block" />
+    </form>
+
 <div class="frame-center">
     <div class="frame-nav">
         <div class="centerLeft">
-            <a class="active"><img src="images/upload.png"  />上传</a>
+            <a  onclick="document.getElementById('btnFileUp').click();" class="active"><img src="images/upload.png"  />上传</a>
             <a><img src="images/createfolder.png"/>新建文件夹</a>
             <a><img src="images/download.png" />离线下载</a>
             <a><img src="images/machine.png" />我的设备</a>

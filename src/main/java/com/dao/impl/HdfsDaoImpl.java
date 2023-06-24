@@ -95,6 +95,21 @@ public class HdfsDaoImpl implements HdfsDao{
             throw new RuntimeException(ex);
         }
     }
+    /**
+     * 上传文件,从web服务器上上传文件到HDFS,传过后,将web服务器上的文件删除
+     * @param parent 父级文件夹
+     * @param localPath  本地文件路径 (这个路径,是在web服务器上,用来做临时中转的目录)
+     */
+    public void uploadFile(String parent,String localPath) {
+        try{
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH),conf,USER_NAME);
+            fs.moveFromLocalFile(new Path(localPath), new Path("/"+parent));
+            fs.close();
+        }
+        catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
     public static void main(String[] args) {
         HdfsDaoImpl dao=new HdfsDaoImpl();
         boolean result=dao.createUserRoot("yyyy");
