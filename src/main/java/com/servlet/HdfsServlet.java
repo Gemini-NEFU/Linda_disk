@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class HdfsServlet extends HttpServlet {
         } else if ("upload".equals(flag)) {
 
         } else if ("download".equals(flag)) {
-
+            download(request,response);
         } else if ("delete".equals(flag)) {
 
         }
@@ -72,6 +73,13 @@ public class HdfsServlet extends HttpServlet {
         request.setAttribute("urlList", urlList);
         request.getRequestDispatcher("center.jsp").forward(request, response);
 
+    }
+    private void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String fileName=request.getParameter("fileName");
+        String downname=fileName.substring(fileName.lastIndexOf("/")+1);
+        response.setContentType("application/octet-stream; charset=utf-8");
+        response.addHeader("Content-Disposition", "attachment; filename="+ URLEncoder.encode(downname, "UTF-8"));
+        hdfsDao.downLoadFileAsStream(fileName, response.getOutputStream());
     }
 
 }

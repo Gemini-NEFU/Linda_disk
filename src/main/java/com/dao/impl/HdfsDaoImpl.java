@@ -3,10 +3,15 @@ import java.net.URI;
 
 import com.beans.DiskFileInfo;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import com.dao.HdfsDao;
+import org.apache.hadoop.io.IOUtils;
+
+import javax.servlet.ServletOutputStream;
+
 public class HdfsDaoImpl implements HdfsDao{
     static final String USER_NAME="hadoop";
 //    static final String HDFS_PATH = "hdfs://mycluster/";
@@ -66,6 +71,25 @@ public class HdfsDaoImpl implements HdfsDao{
             }
 
             return diskFileList;
+        }
+        catch(Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    /**
+     * 下载文件
+     * @param fileName 文件路径,格式如: admin/javatools/Test.txt
+     * @param out servlet对应的输出流,用于下载
+     */
+    public void downLoadFileAsStream(String fileName, ServletOutputStream out) {
+        try {
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH),conf);
+            Path path = new Path("/"+fileName);
+            FSDataInputStream fsInput = fs.open(path);
+            IOUtils.copyBytes(fsInput, out, 4096, false);
+            out.flush();
+            fsInput.close();
         }
         catch(Exception ex) {
             throw new RuntimeException(ex);

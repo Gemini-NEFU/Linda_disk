@@ -32,6 +32,9 @@
         function getSubFiles(parent) {
             window.location.href="HdfsServlet?flag=managerSubFiles&parent="+encodeURI(parent);
         }
+        function download(uri){
+            window.location.href="HdfsServlet?flag=download&fileName="+encodeURI(uri);
+        }
     </script>
 </head>
 
@@ -89,7 +92,7 @@
                         <td >
                             <div>
                                 <a><img src="images/a.png" title="分享"  /></a>
-                                <a><img src="images/b.png"  title="下载"  /></a>
+                                <a href="javascript:download('${f.path }')"><img src="images/b.png"  title="下载"  /></a>
                                 <a><img src="images/c.png"  title="删除"  /></a>
                             </div>
                         </td>
