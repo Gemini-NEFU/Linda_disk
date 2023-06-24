@@ -5,6 +5,7 @@ import com.beans.DiskFileInfo;
 import org.apache.hadoop.fs.FileStatus;
 
 import javax.servlet.ServletOutputStream;
+import java.util.List;
 
 public interface HdfsDao {
     boolean createUserRoot(String foldername);
@@ -17,4 +18,6 @@ public interface HdfsDao {
     boolean deleteFile(String fileName);
 
     boolean createFolder(String parent, String folderName);
+
+    List<DiskFileInfo> getFileListByName(String userName, String fileName);
 }

@@ -36,6 +36,8 @@ public class HdfsServlet extends HttpServlet {
             delete(request,response);
         } else if ("createFolder".equals(flag)) {
             createFolder(request,response);
+        } else if("search".equals(flag)){
+            search(request,response);
         }
     }
 
@@ -44,6 +46,7 @@ public class HdfsServlet extends HttpServlet {
 
         DiskFileInfo[] hdfsFileList = hdfsDao.getRootFileList(user.getUserName());
         request.setAttribute("hdfsFileList", hdfsFileList);
+        request.setAttribute("RootDir",user.getUserName());
         request.getRequestDispatcher("/center.jsp").forward(request, response);
         return;
     }
@@ -200,5 +203,13 @@ public class HdfsServlet extends HttpServlet {
         request.setAttribute("parent", parent);
         manageSubFiles(request, response);
 
+    }
+    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fileName=request.getParameter("fileName");
+        UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+
+        List<DiskFileInfo> hdfsFileList= hdfsDao.getFileListByName(user.getUserName(),fileName);
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/center.jsp").forward(request, response);
     }
 }

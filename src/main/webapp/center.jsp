@@ -54,7 +54,7 @@
 
             var innerTD =
                 "<tr>"+
-                "<td><img src='images/fileIcons/folder.png' /> <input id='txtFolderName'  value='请输入文件夹名称'> <button class='newrow-btn' onclick='mkDir()'>?</button>  <button  class='newrow-btn'  onclick='cancleCreateDir(this)'>X</button> </td><td></td><td></td><td></td>"
+                "<td><img src='images/fileIcons/folder.png' /> <input id='txtFolderName'  value='新建文件夹'> <button class='newrow-btn' onclick='mkDir()'>?</button>  <button  class='newrow-btn'  onclick='cancleCreateDir(this)'>X</button> </td><td></td><td></td><td></td>"
                 +"</tr>";
 
             $("#center_table").prepend(innerTD);
@@ -92,18 +92,20 @@
             <a><img src="images/machine.png" />我的设备</a>
         </div>
         <div class="centerRight">
-            <p>
-                <input type="text" name="fileName" placeholder="搜素你的文件" value="">
-                <img src="images/search.png"  title="搜索"  />
-            </p>
-            <img src="images/menu1.png">
-            <img src="images/menu2.png">
+            <form id="form1" action="HdfsServlet?flag=search" method="post">
+                <p>
+                    <input type="text" name="fileName" placeholder="搜素你的文件" value="">
+                    <img onclick="$('#form1').submit()" src="images/search.png"  title="搜索"  />
+                </p>
+                <img src="images/menu1.png">
+                <img src="images/menu2.png">
+            </form>
         </div>
     </div>
 
     <div class="frame-title">
         	   <span>
-          <a onclick='getSubFiles("${fn:split(url,"/")[0]}")'> 全部文件  | </a>
+          <a onclick='getSubFiles("${rootDir}")'> 全部文件  | </a>
     <c:forEach var="url" items="${urlList }">
         <a onclick='getSubFiles("${fn:split(url,"_")[0]}")'> &gt; ${fn:split(url,"_")[1]}   </a>
     </c:forEach>

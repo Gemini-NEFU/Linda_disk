@@ -1,12 +1,11 @@
 package com.dao.impl;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.beans.DiskFileInfo;
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FileStatus;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.fs.*;
 import com.dao.HdfsDao;
 import org.apache.hadoop.io.IOUtils;
 
@@ -15,7 +14,7 @@ import javax.servlet.ServletOutputStream;
 public class HdfsDaoImpl implements HdfsDao{
     static final String USER_NAME="hadoop";
 //    static final String HDFS_PATH = "hdfs://mycluster/";
-    static final String HDFS_PATH = "hdfs://hadoophyq:8020";
+    static final String HDFS_PATH = "hdfs://hadoophyq:8020/";
     static final Configuration conf;
 
 //    static {
@@ -153,6 +152,29 @@ public class HdfsDaoImpl implements HdfsDao{
             throw new RuntimeException(ex);
         }
 
+    }
+    public List<DiskFileInfo> getFileListByName(String userName, String fileName) {
+        fileName=fileName.toLowerCase();
+        List<DiskFileInfo> fileList=new ArrayList<DiskFileInfo>();
+        try {
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf);
+
+            //这个方法后面的参数true 表示要用递归
+            RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path(HDFS_PATH+userName), true);
+
+            while(files.hasNext()) {
+                LocatedFileStatus file = files.next();
+                if(file.getPath().getName().toLowerCase().contains(fileName)) {
+                    DiskFileInfo info=new DiskFileInfo(file);
+                    fileList.add(info);
+                }
+            }
+
+            return fileList;
+        }
+        catch(Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
     public static void main(String[] args) {
         HdfsDaoImpl dao=new HdfsDaoImpl();
