@@ -3,6 +3,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.util.StrUtil;
 import org.apache.hadoop.fs.FileStatus;
 
 public class DiskFileInfo {
@@ -38,26 +40,7 @@ public class DiskFileInfo {
         // 1024 * 1024 *1024  =1T  =1099511627776
 
         float size=f.getLen();
-
-        if(size>=1099511627776L){
-            this.len= String.format("%.2f", size/1024/1024/1024/1024)+" P";
-        }
-        else if(size>=1073741824){
-            this.len= String.format("%.2f", size/1024/1024/1024)+" G";
-        }
-
-        else if(size>=1048576){
-            this.len= String.format("%.2f", size/1024/1024)+" M";
-        }
-
-        else if(size>1024)   {
-            this.len= String.format("%.2f", size/1024)+" K";
-        }
-
-        else{
-            this.len= size+ " Byte";
-        }
-
+        this.len= StrUtil.getSizeStr(size);
         return this.len;
 
     }

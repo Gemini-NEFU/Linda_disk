@@ -110,6 +110,22 @@ public class HdfsDaoImpl implements HdfsDao{
             throw new RuntimeException(ex);
         }
     }
+    /**
+     * 计算用户共有了多少网盘空间
+     * @param userRoot 用户名
+     * @return 点用的空间大小,单位为字节
+     */
+    public long getUserDiskSize(String userRoot) {
+        try {
+            FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf);
+            long size=fs.getContentSummary(new Path("/"+userRoot)).getLength();
+            fs.close();
+            return size;
+        }
+        catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     public static void main(String[] args) {
         HdfsDaoImpl dao=new HdfsDaoImpl();
         boolean result=dao.createUserRoot("yyyy");

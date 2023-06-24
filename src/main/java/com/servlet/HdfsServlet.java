@@ -153,6 +153,7 @@ public class HdfsServlet extends HttpServlet {
                     item.delete();
 
                     request.setAttribute("parent", parent);  //这句的目的是把paren传给下面的 manageSubFiles   要注意这里
+                    request.setAttribute("refreshScript", "window.parent.leftFrame.location.reload()");
                     manageSubFiles(request, response);
                 }
             }

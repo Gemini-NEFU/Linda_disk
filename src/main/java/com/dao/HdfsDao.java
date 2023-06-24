@@ -12,4 +12,5 @@ public interface HdfsDao {
     DiskFileInfo[] getSubFileList(String parent);
     void downLoadFileAsStream(String fileName, ServletOutputStream outputStream);
     void uploadFile(String parent, String localPath);
+    long getUserDiskSize(String userRoot);
 }

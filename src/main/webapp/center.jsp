@@ -39,6 +39,7 @@
             $("#img1").show();
             document.form1.submit();
         }
+        ${refreshScript}
     </script>
 </head>
 
