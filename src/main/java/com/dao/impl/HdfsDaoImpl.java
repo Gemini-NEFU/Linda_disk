@@ -58,7 +58,7 @@ public class HdfsDaoImpl implements HdfsDao{
     public DiskFileInfo[] getSubFileList(String parent) {
         try {
             FileSystem fs = FileSystem.get(URI.create(HDFS_PATH), conf);
-            FileStatus[] fileList = fs.listStatus(new Path(parent));
+            FileStatus[] fileList = fs.listStatus(new Path("/"+parent));
             DiskFileInfo[] diskFileList=new DiskFileInfo[fileList.length];
             for(int i=0;i<fileList.length;i++) {
                 FileStatus f=fileList[i];

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,10 +56,10 @@
 
     <div class="frame-title">
         	   <span>
-          <a href="HdfsServlet?flag=manage"> 全部文件  | </a>
-        	<c:forEach  var="url" items="${urlList }">
-                <a onclick='getSubFiles("${fn:split(url,"_")[0] }")'>  &gt;  ${fn:split(url,"_")[1]}  </a>
-            </c:forEach>
+          <a onclick='getSubFiles("${fn:split(url,"/")[0]}")'> 全部文件  | </a>
+    <c:forEach var="url" items="${urlList }">
+        <a onclick='getSubFiles("${fn:split(url,"_")[0]}")'> &gt; ${fn:split(url,"_")[1]}   </a>
+    </c:forEach>
       	</span>
         <span>
             		  已全部加载，共  <label>${fn:length(hdfsFileList)} </label>个

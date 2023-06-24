@@ -9,6 +9,7 @@ public class DiskFileInfo {
     public DiskFileInfo(FileStatus f) {
         this.f=f;
     }
+    public static final String HDFS_PATH="hdfs://hadoophyq:8020/";
     //采取装饰设计模式,对FileStatus类进行装饰;
     private FileStatus f;
 
@@ -117,13 +118,15 @@ public class DiskFileInfo {
         this.icon = icon;
     }
     public String getPath() {
-        return f.getPath()+"";
+        this.path=this.f.getPath().toString().replace(HDFS_PATH, "");
+        return path;
     }
     public void setPath(String path) {
         this.path = path;
     }
     public String getName() {
-        return f.getPath().getName();
+        this.name=this.f.getPath().getName().replace(HDFS_PATH, "");
+        return name;
     }
     public void setName(String name) {
         this.name = name;

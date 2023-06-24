@@ -1,5 +1,4 @@
 package com.servlet;
-
 import com.beans.*;
 import com.dao.*;
 import com.dao.impl.HdfsDaoImpl;
@@ -39,10 +38,12 @@ public class HdfsServlet extends HttpServlet {
         DiskFileInfo[] hdfsFileList= hdfsDao.getRootFileList(user.getUserName());
         request.setAttribute("hdfsFileList", hdfsFileList);
         request.getRequestDispatcher("/center.jsp").forward(request, response);
+        return;
     }
     //点了文件夹以后,查出它的子文件列表
     private void managerSubFiles(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String parent=request.getParameter("parent");  // 格式: /admin/java/lesson3
+        String parent=request.getParameter("parent");  // 格式: /admin/java/lesson3  http://master:9000
+
         if(StrUtil.isNullOrEmpty(parent)) {
             UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
             parent=user.getUserName();
@@ -50,28 +51,27 @@ public class HdfsServlet extends HttpServlet {
 
         DiskFileInfo[] hdfsFileList= hdfsDao.getSubFileList(parent);
         request.setAttribute("hdfsFileList", hdfsFileList);
-        request.getRequestDispatcher("/center.jsp").forward(request, response);
 
-        //以下处理的是前台上面的 导航 类似:  javatools  > aaa  > bbb  > ccc 的呈现
+
+        //以下处理前台导航显示 类似     全部文件 |>java >Lesson7> doc
         List<String> urlList=new ArrayList<String>();
-        urlList.add(parent);
 
-        //处理完后,是  admin, admin/java, admin/java/lesson7 这样
-        while(parent.lastIndexOf("/")!=-1){
-            parent=	parent.substring(0,parent.lastIndexOf("/"));
-            urlList.add(0,parent );
+        urlList.add(parent);   //      /admin/java/lesson3/doc/d1
+
+        while(parent.lastIndexOf("/")!=-1) {
+            parent=parent.substring(0,parent.lastIndexOf("/"));
+            urlList.add(0,parent);
+
         }
+        urlList.remove(0); //当前用户的用户目录没有必要在前台显示,所以移除
 
-        urlList.remove(0);  //用户家目录没有必要在前台显示,所以排除
-
-        for (int i=0;i<urlList.size();i++) {
+        for(int i=0;i<urlList.size();i++) {
             String str=urlList.get(i);
-            urlList.set(i,str+"_"+str.substring(str.lastIndexOf("/")+1)); //处理完后是 admin/java_java, admin/java/lesson7_lesson7 这样
+            urlList.set(i,str+"_"+str.substring(str.lastIndexOf("/")+1));
         }
-
-
         request.setAttribute("urlList", urlList);
         request.getRequestDispatcher("center.jsp").forward(request, response);
+
     }
 
 }
