@@ -105,6 +105,7 @@
 
     <div class="frame-title">
         	   <span>
+<%--                   <a href="HdfsServlet?flag=manage"> 全部文件  | </a>--%>
           <a onclick='getSubFiles("${rootDir}")'> 全部文件  | </a>
     <c:forEach var="url" items="${urlList }">
         <a onclick='getSubFiles("${fn:split(url,"_")[0]}")'> &gt; ${fn:split(url,"_")[1]}   </a>

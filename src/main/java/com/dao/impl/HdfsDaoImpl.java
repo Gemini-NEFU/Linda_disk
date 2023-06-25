@@ -1,7 +1,9 @@
 package com.dao.impl;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.beans.DiskFileInfo;
 import org.apache.hadoop.conf.Configuration;
@@ -29,6 +31,12 @@ public class HdfsDaoImpl implements HdfsDao{
     static {
         conf=new Configuration();
         conf.set("fs.hdfs.impl.disable.cache","true");
+    }
+    //文件类型与扩展名后缀对应关系
+    private static Map<String ,String []> typeToFileExtMap;
+    static {
+        typeToFileExtMap=new HashMap<String ,String []>();
+        typeToFileExtMap.put("picture",new String[]{".jepg",".bmp","jpg",".png"});
     }
     /**
      * 用于在hdfs创建目录
@@ -175,6 +183,35 @@ public class HdfsDaoImpl implements HdfsDao{
         catch(Exception ex) {
             throw new RuntimeException(ex);
         }
+    }
+    public List<DiskFileInfo> getFileListByType(String userName,String fileType){
+        List<DiskFileInfo> fileList=new ArrayList<>();
+
+        try{
+            String userPath=HDFS_PATH+userName;
+            FileSystem fs=FileSystem.get(URI.create(userPath),conf,USER_NAME);
+
+            //递归遍历
+            RemoteIterator<LocatedFileStatus> files=fs.listFiles(new Path(userPath),true);
+            while (files.hasNext()){
+                LocatedFileStatus file = files.next();
+                //过滤查询的文件类型
+                String[] fileExtList = typeToFileExtMap.get(fileType);
+
+                for(String ext:fileExtList){
+                    if(file.getPath().getName().toLowerCase().endsWith(ext)){
+                        DiskFileInfo info=new DiskFileInfo(file);
+                        fileList.add(info);
+                        break;
+                    }
+                }
+
+            }
+        }
+        catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
+        return fileList;
     }
     public static void main(String[] args) {
         HdfsDaoImpl dao=new HdfsDaoImpl();

@@ -20,4 +20,6 @@ public interface HdfsDao {
     boolean createFolder(String parent, String folderName);
 
     List<DiskFileInfo> getFileListByName(String userName, String fileName);
+
+    List<DiskFileInfo> getFileListByType(String userName,String fileName);
 }
