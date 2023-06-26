@@ -52,13 +52,18 @@
   </div>
 </div>
 <script>
-  $(".remainingSpace").css("width","<%=percentStr%>");
   $(function (){
-      $("ul li").click(function (){
-        $(this).children().addClass("active");
-        //给当前元素的兄弟元素去掉一个样式
-        $(this).siblings().children().removeClass("active");
-      })
+    <%--$(".remainingSpace").css("width","<%=percentStr%>");--%>
+    let total= parseFloat($(".remaining").css("width"))
+    let percent =<%=percent%>
+    percent = total * percent;
+    $(".remainingSpace").css("width",percent);
+
+    $("li").click(function (){
+      $(this).children("a").addClass("active");
+      //给当前元素的兄弟元素去掉一个样式
+      $(this).siblings().children("a").removeClass("active");
+    })
   })
 </script>
 
