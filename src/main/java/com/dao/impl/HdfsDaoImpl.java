@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.beans.DiskFileInfo;
+import com.util.StrUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import com.dao.HdfsDao;
@@ -33,10 +34,17 @@ public class HdfsDaoImpl implements HdfsDao{
         conf.set("fs.hdfs.impl.disable.cache","true");
     }
     //文件类型与扩展名后缀对应关系
-    private static Map<String ,String []> typeToFileExtMap;
+    //表示文件类型与扩展名的后缀对应关系
+    private static Map<String,String []> typeToFileExtMap ;
+
+    //要在静态代码块中初始
     static {
-        typeToFileExtMap=new HashMap<String ,String []>();
-        typeToFileExtMap.put("picture",new String[]{".jepg",".bmp","jpg",".png"});
+        typeToFileExtMap=new HashMap<String,String []>();
+        typeToFileExtMap.put("picture",new String[]{".jpeg",".bmp",".gif",".png",".tiff",".psd",".eps",".raw",".pdf",".png",".pxr",".mac",".jpg",".tga",".img",".pcd"});
+        typeToFileExtMap.put("txt",new String[]{".txt",".doc",".docx",".wps",".xls",".xlsx",".java",".pdf",".c",".h",".cpp",".xml",".log"});
+        typeToFileExtMap.put("avi",new String[]{".wmv",".avi",".wma",".rmvb",".rm",".flash",".mp4",".mid",".3gp",".mpg", ".mp2v",".mpv2",".m1v",".dat",".dsa",".mkv"});
+        typeToFileExtMap.put("sound",new String[]{".mp3",".wma",".avi",".rm",".rmvb",".flv",".mpg",".mov",".mkv"});
+        typeToFileExtMap.put("gz",new String[]{".gz",".zip",".rar",".z",".bz",".bz2",".7z",".mov",".mkv"});
     }
     /**
      * 用于在hdfs创建目录
@@ -184,31 +192,33 @@ public class HdfsDaoImpl implements HdfsDao{
             throw new RuntimeException(ex);
         }
     }
-    public List<DiskFileInfo> getFileListByType(String userName,String fileType){
+    public List<DiskFileInfo> getFileListByType(String userName, String fileType) {
         List<DiskFileInfo> fileList=new ArrayList<>();
 
-        try{
+        try {
             String userPath=HDFS_PATH+userName;
             FileSystem fs=FileSystem.get(URI.create(userPath),conf,USER_NAME);
 
             //递归遍历
-            RemoteIterator<LocatedFileStatus> files=fs.listFiles(new Path(userPath),true);
-            while (files.hasNext()){
+            RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path(userPath), true);
+            while(files.hasNext()) {
                 LocatedFileStatus file = files.next();
-                //过滤查询的文件类型
-                String[] fileExtList = typeToFileExtMap.get(fileType);
 
-                for(String ext:fileExtList){
-                    if(file.getPath().getName().toLowerCase().endsWith(ext)){
+                //过滤出想要的类型的文件
+                String [] fileExtList =typeToFileExtMap.getOrDefault(fileType,new String[]{""});
+                if(StrUtil.IsNullOrEmpty(fileExtList[0]))
+                    return fileList;
+
+                for(String ext:fileExtList) {
+                    if(file.getPath().getName().toLowerCase().endsWith(ext)) {
                         DiskFileInfo info=new DiskFileInfo(file);
                         fileList.add(info);
                         break;
                     }
                 }
-
             }
         }
-        catch (Exception ex){
+        catch(Exception ex) {
             throw new RuntimeException(ex);
         }
         return fileList;

@@ -15,7 +15,7 @@ public class UserServlet extends HttpServlet {
     private HdfsDao hdfsDao=new HdfsDaoImpl();
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("UTF-8");
         String flag=request.getParameter("flag");
 
         if("login".equals(flag)){

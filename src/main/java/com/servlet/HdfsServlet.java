@@ -21,7 +21,7 @@ public class HdfsServlet extends HttpServlet {
     private HdfsDao hdfsDao = new HdfsDaoImpl();
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
+        request.setCharacterEncoding("UTF-8");
         String flag = request.getParameter("flag");
 
         if ("manage".equals(flag)) {
@@ -153,8 +153,6 @@ public class HdfsServlet extends HttpServlet {
 
                     request.setAttribute("msg", "文件上传成功!");
 
-                    //这句的作用是用来刷新磁盘使用百分比显示的
-                    //		request.setAttribute("refreshScript", "window.parent.leftFrame.location.reload()");
 
                     //删除服务器(tomcat上的文件)
                     item.delete();

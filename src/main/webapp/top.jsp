@@ -7,12 +7,29 @@
     <link rel="stylesheet" href="css/layout.css">
     <title></title>
 </head>
+<script>
+    //退出
+    function logout(){
+        if(confirm("确定要注销退出吗")==true)
+        {
+            window.location.href="UserServlet?flag=logout";
+        }
+    }
+    function f1(){
+        window.top.leftFrame.location.href="left.jsp";
+        $(this).addClass("active");
+    }
+    function f2(item) {
+        window.top.leftFrame.location.href = "left-analyse.jsp";
+        $(this).addClass("active");
+    }
+</script>
 <body>
 <div class="frame-all">
     <div class="layoutHeader">
         <div class="listLeft">
             <img src="images/1.png" height="57" >
-            <a href="javascript:f1()"    class="active">网盘</a>
+            <a href="javascript:f1()" class="active">网盘</a>
             <a href="javascript:f2()" class="active">数据分析</a>
             <a href="#">分享</a>
             <a href="#">找资源</a>
@@ -28,16 +45,6 @@
             <a href="javascript:logout()">
                 <img width="27px" title="注销退出" src="images/logout.png" >
             </a>
-            <script>
-                //退出
-                function logout(){
-                    if(confirm("确定要注销退出吗")==true)
-                    {
-                        window.location.href="UserServlet?flag=logout";
-                    }
-                }
-            </script>
-
             <img src="images/icon1.png">
             <img src="images/icon2.png">
             <img src="images/icon3.png">

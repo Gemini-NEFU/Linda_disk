@@ -13,7 +13,6 @@
         $(function(){
             initTrEvent();
         })
-        //下面是声明一个javacript函数
         function initTrEvent(){
             //.给选中的元素加一个鼠标滑过的事件
             $("#center_table tr").mouseover(function(){
@@ -30,10 +29,10 @@
 
         //
         function getSubFiles(parent) {
-            window.location.href="HdfsServlet?flag=manageSubFiles&parent="+encodeURI(parent);
+            window.location.href="HdfsServlet?flag=manageSubFiles&parent="+encodeURIComponent(parent);
         }
         function download(uri){
-            window.location.href="HdfsServlet?flag=download&fileName="+encodeURI(uri);
+            window.location.href="HdfsServlet?flag=download&fileName="+encodeURIComponent(uri);
         }
         function uploadFile(){
             $("#img1").show();
@@ -41,7 +40,7 @@
         }
         function delFile(fileName){
             if(confirm('确定要删除吗')==true){
-                window.location.href=" HdfsServlet?flag=delete&fileName=" +encodeURI(fileName);
+                window.location.href=" HdfsServlet?flag=delete&fileName=" +encodeURIComponent(fileName);
             }
         }
         function createNewTr(){
@@ -62,8 +61,8 @@
             document.getElementById("txtFolderName").select(); //让文本框内的文本默认被选中
         }
         function mkDir(){
-            var parent=encodeURI($("#parent").val());
-            var folderName=encodeURI($("#txtFolderName").val());
+            var parent=encodeURIComponent($("#parent").val());
+            var folderName=encodeURIComponent($("#txtFolderName").val());
             var url="HdfsServlet?flag=createFolder&parent="+parent+"&folderName="+folderName;
             window.location.href=url;
         }
