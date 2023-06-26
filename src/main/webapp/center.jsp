@@ -128,7 +128,7 @@
         <div class="datas">
             <table id="center_table">
                 <c:forEach var="f" items="${hdfsFileList}">
-                    <tr class="highlightTd">
+                    <tr >
                         <td>
                             &nbsp; <input type="checkbox"><img src="images/fileIcons/${f.icon}">
                             <label   <c:if test="${f.f.directory==true }"> onclick="getSubFiles('${f.path }')" style='cursor:pointer' </c:if> >

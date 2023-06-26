@@ -5,8 +5,10 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="css/poposlides.css">
     <link rel="stylesheet" href="css/layout.css">
+
     <title></title>
 </head>
+<script src="js/jquery-2.1.4.min.js" ></script>
 <script>
     //退出
     function logout(){
@@ -15,13 +17,20 @@
             window.location.href="UserServlet?flag=logout";
         }
     }
-    function f1(){
-        window.top.leftFrame.location.href="left.jsp";
-        $(this).addClass("active");
+    function leftClick(){
+        $("div.listLeft a").click(function (){
+            $(this).addClass("active");
+            //给当前元素的兄弟元素去掉一个样式
+            $(this).siblings().removeClass("active");
+        })
     }
-    function f2(item) {
-        window.top.leftFrame.location.href = "left-analyse.jsp";
-        $(this).addClass("active");
+    function f1(){
+        leftClick()
+        window.top.leftFrame.location.href="left.jsp";
+    }
+    function f2(){
+        leftClick()
+        window.top.leftFrame.location.href ="left-analyse.jsp";
     }
 </script>
 <body>
@@ -30,7 +39,7 @@
         <div class="listLeft">
             <img src="images/1.png" height="57" >
             <a href="javascript:f1()" class="active">网盘</a>
-            <a href="javascript:f2()" class="active">数据分析</a>
+            <a href="javascript:f2()">数据分析</a>
             <a href="#">分享</a>
             <a href="#">找资源</a>
             <a href="#">更多</a>
