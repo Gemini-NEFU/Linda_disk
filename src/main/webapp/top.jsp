@@ -17,19 +17,16 @@
             window.location.href="UserServlet?flag=logout";
         }
     }
-    function leftClick(){
+    $(function(){
         $("div.listLeft a").click(function (){
             $(this).addClass("active");
-            //给当前元素的兄弟元素去掉一个样式
             $(this).siblings().removeClass("active");
         })
-    }
+    })
     function f1(){
-        leftClick()
         window.top.leftFrame.location.href="left.jsp";
     }
     function f2(){
-        leftClick()
         window.top.leftFrame.location.href ="left-analyse.jsp";
     }
 </script>

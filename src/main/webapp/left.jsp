@@ -36,7 +36,7 @@
               float size=hdfsDao.getUserDiskSize(user.getUserName());
               String sizeStr=StrUtil.getSizeStr(size);
               double percent = size/(1024*1024*1024);  //1G
-              String percentStr=	String.format("%.2f",percent*100);
+              String percentStr=String.format("%.2f",percent*100);
             %>
             <span><%=sizeStr %> / 1 G</span>
           </div>
@@ -53,6 +53,13 @@
 </div>
 <script>
   $(".remainingSpace").css("width","<%=percentStr%>");
+  $(function (){
+      $("ul li").click(function (){
+        $(this).children().addClass("active");
+        //给当前元素的兄弟元素去掉一个样式
+        $(this).siblings().children().removeClass("active");
+      })
+  })
 </script>
 
 
