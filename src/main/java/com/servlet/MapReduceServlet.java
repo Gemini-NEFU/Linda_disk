@@ -27,7 +27,18 @@ public class MapReduceServlet extends HttpServlet {
             removeRepeat(request,response);
         } else if ("searchFilesForSort".equals(flag)){
             searchFilesForSort(request,response);
+        } else if ("logAnalyse".equals(flag)){
+            logAnalyse(request,response);
         }
+    }
+    private void logAnalyse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+
+        String fileType=request.getParameter("type");
+        List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
+
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/mapreduce/file-log-analyse.jsp").forward(request,response);
     }
     private void searchFilesForSort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
