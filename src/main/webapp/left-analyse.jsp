@@ -28,8 +28,8 @@
 
     <div class="frame-aside">
         <ul id="ul1">
-            <li><a href=""  target="centerFrame" class="active"><img src="images/fileIcons/all.png" />数据分析</a></li>
-            <li><a href="" target="centerFrame" ><img src="images/fileIcons/icon0.png" />MR-WORDCOUNT</a></li>
+            <li><a href="HdfsServlet?flag=manage"  target="centerFrame" class="active"><img src="images/fileIcons/all.png" />数据分析</a></li>
+            <li><a href="MapReduceServlet?flag=searchFilesForWordCount&type=txt" target="centerFrame" ><img src="images/fileIcons/icon0.png" />MR-WordCount</a></li>
             <li><a href="" target="centerFrame" ><img src="images/fileIcons/icon0.png" />MR-去重复示例</a></li>
             <li><a href="" target="centerFrame" ><img src="images/fileIcons/icon0.png" />MR-排序示例</a></li>
             <li><a href="" target="centerFrame" ><img src="images/fileIcons/icon0.png" />MR-分区计算示例</a></li>

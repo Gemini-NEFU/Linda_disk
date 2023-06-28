@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>海康云盘系统</title>
+    <title>云盘系统</title>
     <link rel="stylesheet" href="css/poposlides.css">
     <link rel="stylesheet" href="css/layout.css">
     <script src="js/jquery-2.1.4.min.js" ></script>

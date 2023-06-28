@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>海康云盘系统</title>
+    <title>云盘系统</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="css/poposlides.css">

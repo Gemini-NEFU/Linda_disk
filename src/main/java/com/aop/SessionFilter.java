@@ -43,7 +43,7 @@ public class SessionFilter implements Filter{
         //如果没有session,证明没有登录过
         HttpSession session= req.getSession();
         if(session.getAttribute("session_user")==null) {
-            String script="<script>alert(' illegal access! ');window.top.location.href='login.jsp'</script>";
+            String script="<script>alert(' illegal access! ');window.top.location.href='/login.jsp'</script>";
             response.getWriter().println(script);
         }
         else {

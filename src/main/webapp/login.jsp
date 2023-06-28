@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>海康云盘系统</title>
+    <title>云盘系统</title>
 
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
@@ -86,7 +86,7 @@
         <a href="#"><img src="images/item5.png"></a>
     </div>
     <p>
-        ?2023 海康
+        ?2023
         <a href="#">移动开放平台</a> | <a href="#">服务协议</a> |
         <a href="#">权利声明</a> | <a href="#">版本更新</a> |
         <a href="#">帮助中心</a> | <a href="#">版权投诉</a>
