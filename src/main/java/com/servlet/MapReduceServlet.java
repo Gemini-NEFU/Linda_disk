@@ -25,7 +25,18 @@ public class MapReduceServlet extends HttpServlet {
             searchFilesForWordCount(request,response);
         } else if ("removeRepeat".equals(flag)) {
             removeRepeat(request,response);
+        } else if ("searchFilesForSort".equals(flag)){
+            searchFilesForSort(request,response);
         }
+    }
+    private void searchFilesForSort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+
+        String fileType=request.getParameter("type");
+        List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
+
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/mapreduce/file-list-sort.jsp").forward(request, response);
     }
 
     //点击 MR-去重复示例 后要把文件列表查出来,然后选中文件进行分析
