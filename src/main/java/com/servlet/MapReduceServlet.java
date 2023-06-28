@@ -23,10 +23,23 @@ public class MapReduceServlet extends HttpServlet {
 
         if ("searchFilesForWordCount".equals(flag)) {
             searchFilesForWordCount(request,response);
-        } else if ("".equals(flag)) {
-
+        } else if ("removeRepeat".equals(flag)) {
+            removeRepeat(request,response);
         }
     }
+
+    //点击 MR-去重复示例 后要把文件列表查出来,然后选中文件进行分析
+    private void removeRepeat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+
+        String fileType=request.getParameter("type");
+        List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
+
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/mapreduce/file-list-removeRepeat.jsp").forward(request, response);
+
+    }
+
     //分类查看文件,转到文件分析列表页
     private void searchFilesForWordCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
@@ -35,6 +48,6 @@ public class MapReduceServlet extends HttpServlet {
         List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
 
         request.setAttribute("hdfsFileList", hdfsFileList);
-        request.getRequestDispatcher("/mapreduce/file-list-wordcount.jsp").forward(request, response);
+        request.getRequestDispatcher("/mapreduce/file-list-wordCount.jsp").forward(request, response);
     }
 }

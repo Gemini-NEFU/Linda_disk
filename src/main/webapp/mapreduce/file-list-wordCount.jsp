@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="css/poposlides.css">
     <link rel="stylesheet" href="css/layout.css">
-    <script src="js/jquery-2.1.4.min.js" ></script>
+    <script src="/js/jquery-2.1.4.min.js" ></script>
 
     <script>
 
