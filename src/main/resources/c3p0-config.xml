@@ -13,7 +13,7 @@
     <!-- This is my config for mysql-->
     <named-config name="mysql">
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
-        <property name="jdbcUrl">jdbc:mysql://localhost:3306/disk?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="jdbcUrl">jdbc:mysql://10.90.6.107:3306/disk?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</property>
         <property name="user">root</property>
         <property name="password">3W9hyq9wl9com</property>
         <property name="initialPoolSize">2</property>

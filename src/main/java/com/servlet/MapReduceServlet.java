@@ -29,7 +29,18 @@ public class MapReduceServlet extends HttpServlet {
             searchFilesForSort(request,response);
         } else if ("logAnalyse".equals(flag)){
             logAnalyse(request,response);
+        } else if ("searchFilesForPartSort".equals(flag)){
+            searchFilesForPartSort(request,response);
         }
+    }
+    private void searchFilesForPartSort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
+
+        String fileType=request.getParameter("type");
+        List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
+
+        request.setAttribute("hdfsFileList", hdfsFileList);
+        request.getRequestDispatcher("/mapreduce/file-list-partSort.jsp").forward(request, response);
     }
     private void logAnalyse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
@@ -38,7 +49,7 @@ public class MapReduceServlet extends HttpServlet {
         List<DiskFileInfo> hdfsFileList =hdfsDao.getFileListByType(user.getUserName(),fileType);
 
         request.setAttribute("hdfsFileList", hdfsFileList);
-        request.getRequestDispatcher("/mapreduce/file-log-analyse.jsp").forward(request,response);
+        request.getRequestDispatcher("/mapreduce/file-list-logAnalyse.jsp").forward(request,response);
     }
     private void searchFilesForSort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserInfo user=(UserInfo)request.getSession().getAttribute("session_user");
