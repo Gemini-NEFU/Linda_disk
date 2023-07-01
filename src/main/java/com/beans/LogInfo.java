@@ -4,21 +4,22 @@ import org.apache.hadoop.io.WritableComparable;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import java.util.Objects;
 
 public class LogInfo implements WritableComparable<LogInfo>{
-    String day;
-    String ip;
-    String uri;
-    String flag;
-    String time;
+    private String day;
+    private String ip;
+    private String url;
+    private String flag;
+    private String createTime;
+    private String userName;
 
-    public LogInfo(String day, String ip, String uri, String flag, String time, String userName) {
+    public LogInfo(){};
+    public LogInfo(String day, String ip, String url, String flag, String createTime, String userName) {
         this.day = day;
         this.ip = ip;
-        this.uri = uri;
+        this.url = url;
         this.flag = flag;
-        this.time = time;
+        this.createTime = createTime;
         this.userName = userName;
     }
 
@@ -38,12 +39,12 @@ public class LogInfo implements WritableComparable<LogInfo>{
         this.ip = ip;
     }
 
-    public String getUri() {
-        return uri;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getFlag() {
@@ -54,12 +55,12 @@ public class LogInfo implements WritableComparable<LogInfo>{
         this.flag = flag;
     }
 
-    public String getTime() {
-        return time;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getUserName() {
@@ -70,7 +71,6 @@ public class LogInfo implements WritableComparable<LogInfo>{
         this.userName = userName;
     }
 
-    String userName;
     @Override
     public int compareTo(LogInfo o) {
         return this.userName.compareTo(o.userName);
@@ -80,9 +80,9 @@ public class LogInfo implements WritableComparable<LogInfo>{
     public void write(DataOutput out) throws IOException {
         out.writeUTF(this.day);
         out.writeUTF(this.ip);
-        out.writeUTF(this.uri);
+        out.writeUTF(this.url);
         out.writeUTF(this.flag);
-        out.writeUTF(this.time);
+        out.writeUTF(this.createTime);
         out.writeUTF(this.userName);
     }
 
@@ -90,14 +90,14 @@ public class LogInfo implements WritableComparable<LogInfo>{
     public void readFields(DataInput in) throws IOException {
         this.day=in.readUTF();
         this.ip=in.readUTF();
-        this.uri=in.readUTF();
+        this.url=in.readUTF();
         this.flag=in.readUTF();
-        this.time=in.readUTF();
+        this.createTime =in.readUTF();
         this.userName=in.readUTF();
     }
 
     @Override
     public String toString() {
-        return this.day+"\t" +this.ip+"\t"+this.uri+"\t"+this.flag+"\t"+this.time+"\t"+this.userName;
+        return this.day+"\t" +this.ip+"\t"+this.url+"\t"+this.flag+"\t"+this.createTime +"\t"+this.userName;
     }
 }

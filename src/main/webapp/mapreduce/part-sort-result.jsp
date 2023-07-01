@@ -62,7 +62,7 @@
   <cite style="color:#A30014;font-weight:bold;font-family: 'Montserrat', 'sans-serif' " >
     <a href="javascript:window.history.back()"  >
       <img  width="25" src="images/fileIcons/back.png"  ></a>
-    &nbsp;	&nbsp;	&nbsp;	&nbsp; MR-分区排序示例 ${param.filePath}
+    &nbsp;	&nbsp;	&nbsp;	&nbsp; MR-分区排序 ${param.filePath}
   </cite>
   <hr />
 

@@ -128,6 +128,18 @@
       <classifier>jdk13</classifier>
     </dependency>
 
+<!--JDBC连接 hive-->
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-exec</artifactId>
+      <version>3.1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-jdbc</artifactId>
+      <version>1.2.1</version>
+    </dependency>
   </dependencies>
 
   <build>
